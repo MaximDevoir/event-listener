@@ -7,6 +7,7 @@ workflow "build and test, conditional publish" {
   resolves = [
     "branch.lint.node.10",
     "branch.test.node.10",
+    "branch.coverage.node.10",
     "branch.coveralls.node.10",
     "release.npm.publish",
     "snyk.audit"
@@ -44,6 +45,12 @@ action "branch.test.node.10" {
   args = "yarn run test"
 }
 
+action "branch.coverage.node.10" {
+  uses = "docker://node:10"
+  needs = ["branch.build.node.10"]
+  args = "yarn run coverage"
+}
+
 action "branch.coveralls.node.10" {
   needs = "branch.install.node.10"
   uses = "actions/npm@master"
@@ -62,7 +69,7 @@ action "snyk.audit" {
 }
 
 action "release.filter" {
-  needs = ["branch.test.node.10"]
+  needs = ["branch.test.node.10", "branch.coverage.node.10"]
   uses = "actions/bin/filter@master"
   args = "tag v*"
 }
