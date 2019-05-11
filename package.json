@@ -14,6 +14,7 @@
     "build:clean": "rimraf ./lib",
     "clean": "npm run build:clean && npm run coverage:clean",
     "coverage": "npm run coverage:clean && npm run coverage:generate",
+    "coverage:check": "./node_modules/.bin/nyc --check-coverage npm test",
     "coverage:clean": "rimraf ./.nyc_output && rimraf ./coverage",
     "coverage:coveralls": "npm run coverage:coveralls:report -- | ./node_modules/.bin/coveralls",
     "coverage:coveralls:report": "npm run coverage && ./node_modules/.bin/nyc report --reporter=text-lcov",
