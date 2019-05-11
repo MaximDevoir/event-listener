@@ -23,8 +23,8 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run start:once -- --watch",
     "start:once": "cross-env NODE_ENV=development npm run build:source --",
-    "test": "cross-env NODE_PATH=$NODE_PATH:src/ mocha --colors --require @babel/register tests/*.spec.js",
-    "test:watch": "mocha --colors -watch --require @babel/register tests/*.spec.js"
+    "test": "cross-env NODE_ENV=test mocha --colors --require @babel/register tests/*.spec.js",
+    "test:watch": "cross-env NODE_ENV=test mocha --colors -watch --require @babel/register tests/*.spec.js"
   },
   "repository": {
     "type": "git",
