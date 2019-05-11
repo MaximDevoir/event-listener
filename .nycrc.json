@@ -1,4 +1,5 @@
 {
+  "instrument": true,
   "watermarks": {
     "lines": [95, 100],
     "functions": [95, 100],
