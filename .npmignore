@@ -1,0 +1,22 @@
+.github/
+.vscode/
+src/
+tests/
+
+# dot files
+.*
+
+# Package locks
+yarn.lock
+package-lock.json
+
+
+# webpack configs
+webpack.config*
+
+# future TS typings support
+typings/
+
+# coverage
+.nyc_output/
+coverage/

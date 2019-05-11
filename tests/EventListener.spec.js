@@ -1,67 +1,69 @@
-/* eslint import/no-extraneous-dependencies: 0, no-native-reassign: 0 */
-import chai from 'chai';
-import expect from 'expect.js';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import EventListener from './../src/EventListener';
+import chai from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+import EventListener from '../src/EventListener'
 
-chai.should();
-chai.use(sinonChai);
+chai.should()
+chai.use(sinonChai)
+
+const { expect } = chai
 
 describe('Event Listener', () => {
-  const trueop = () => true;
-  const event = 'eventname';
-  const modernElement = {
+  const trueop = () => true
+  const event = 'eventname'
+  const webElement = {
     addEventListener: sinon.spy(),
-    removeEventListener: sinon.spy(),
-  };
+    removeEventListener: sinon.spy()
+  }
   const fallbackElement = {
     attachEvent: sinon.spy(),
-    detachEvent: sinon.spy(),
-  };
-  const modernASpy = modernElement.addEventListener;
-  const modernRSpy = modernElement.removeEventListener;
-  const fallbackASpy = fallbackElement.attachEvent;
-  const fallbackRSpy = fallbackElement.detachEvent;
-  const useCapture = false;
+    detachEvent: sinon.spy()
+  }
+  const webAddSpy = webElement.addEventListener
+  const webRemoveSpy = webElement.removeEventListener
+  const fallbackAddSpy = fallbackElement.attachEvent
+  const fallbackRemoveSpy = fallbackElement.detachEvent
+  const useCapture = false
+
+  expect(trueop.call()).to.equal(true)
 
   it('should be a object', () => {
-    (typeof EventListener).should.eql('function');
-  });
+    (typeof EventListener).should.eql('function')
+  })
 
   describe('.add()', () => {
     it('should have .add() method', () => {
-      expect(EventListener).to.have.property('add');
-    });
+      expect(EventListener).to.have.property('add')
+    })
 
     it('should use addEventListener when available', () => {
-      EventListener.add(modernElement, event, trueop, useCapture);
-      expect(modernASpy.calledOnce).to.be(true);
-      expect(modernASpy.calledWithExactly(event, trueop, useCapture)).to.be(true);
-    });
+      EventListener.add(webElement, event, trueop, useCapture)
+      expect(webAddSpy.calledOnce).to.equal(true)
+      expect(webAddSpy.calledWithExactly(event, trueop, useCapture)).to.equal(true)
+    })
 
     it('should fallback to .attachEvent() ', () => {
-      EventListener.add(fallbackElement, event, trueop);
-      expect(fallbackASpy.calledOnce).to.be(true);
-      expect(fallbackASpy.calledWithExactly(`on${event}`, trueop)).to.be(true);
-    });
-  });
+      EventListener.add(fallbackElement, event, trueop)
+      expect(fallbackAddSpy.calledOnce).to.equal(true)
+      expect(fallbackAddSpy.calledWithExactly(`on${event}`, trueop)).to.equal(true)
+    })
+  })
 
   describe('.remove()', () => {
     it('should have .remove() method', () => {
-      expect(EventListener).to.have.property('remove');
-    });
+      expect(EventListener).to.have.property('remove')
+    })
 
     it('should use removeEventListener when available', () => {
-      EventListener.remove(modernElement, event, trueop, useCapture);
-      expect(modernRSpy.calledOnce).to.be(true);
-      expect(modernRSpy.calledWithExactly(event, trueop, useCapture)).to.be(true);
-    });
+      EventListener.remove(webElement, event, trueop, useCapture)
+      expect(webRemoveSpy.calledOnce).to.equal(true)
+      expect(webRemoveSpy.calledWithExactly(event, trueop, useCapture)).to.equal(true)
+    })
 
     it('should fallback to .detachEvent() ', () => {
-      EventListener.remove(fallbackElement, event, trueop);
-      expect(fallbackRSpy.calledOnce).to.be(true);
-      expect(fallbackRSpy.calledWithExactly(`on${event}`, trueop)).to.be(true);
-    });
-  });
-});
+      EventListener.remove(fallbackElement, event, trueop)
+      expect(fallbackRemoveSpy.calledOnce).to.equal(true)
+      expect(fallbackRemoveSpy.calledWithExactly(`on${event}`, trueop)).to.equal(true)
+    })
+  })
+})
