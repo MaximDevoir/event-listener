@@ -48,7 +48,7 @@ action "branch.test.node.10" {
 action "branch.coverage.node.10" {
   uses = "docker://node:10"
   needs = ["branch.build.node.10"]
-  args = "yarn run coverage"
+  args = "yarn run coverage:check"
 }
 
 action "branch.coveralls.node.10" {

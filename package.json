@@ -1,8 +1,8 @@
 {
   "name": "@maximdevoir/event-listener",
   "description": "EventListener handles the adding and removing of events throughout your document. Works with old browsers that use attachEvent and detachEvent (IE 8 and below).",
-  "version": "0.11.1",
-  "main": "lib/event-listener.js",
+  "version": "0.11.2",
+  "main": "lib/@maximdevoir/event-listener.js",
   "license": "MIT",
   "author": {
     "name": "Maxim Devoir",
@@ -14,6 +14,7 @@
     "build:clean": "rimraf ./lib",
     "clean": "npm run build:clean && npm run coverage:clean",
     "coverage": "npm run coverage:clean && npm run coverage:generate",
+    "coverage:check": "./node_modules/.bin/nyc --check-coverage npm test",
     "coverage:clean": "rimraf ./.nyc_output && rimraf ./coverage",
     "coverage:coveralls": "npm run coverage:coveralls:report -- | ./node_modules/.bin/coveralls",
     "coverage:coveralls:report": "npm run coverage && ./node_modules/.bin/nyc report --reporter=text-lcov",
@@ -23,8 +24,8 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run start:once -- --watch",
     "start:once": "cross-env NODE_ENV=development npm run build:source --",
-    "test": "cross-env NODE_PATH=$NODE_PATH:src/ mocha --colors --require @babel/register tests/*.spec.js",
-    "test:watch": "mocha --colors -watch --require @babel/register tests/*.spec.js"
+    "test": "cross-env NODE_ENV=test mocha --colors --require @babel/register tests/*.spec.js",
+    "test:watch": "cross-env NODE_ENV=test mocha --colors -watch --require @babel/register tests/*.spec.js"
   },
   "repository": {
     "type": "git",

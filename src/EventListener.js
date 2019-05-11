@@ -17,6 +17,7 @@ export default class EventListener {
    * @param {Boolean}  useCapture useCapture
    */
   static add(target, event, listener, useCapture = false) {
+    /* istanbul ignore else */
     if (target.addEventListener) {
       target.addEventListener(event, listener, useCapture)
     } else if (target.attachEvent) {
@@ -33,6 +34,7 @@ export default class EventListener {
    * @param {Boolean}  useCapture useCapture
    */
   static remove(target, event, listener, useCapture = false) {
+    /* istanbul ignore else */
     if (target.removeEventListener) {
       target.removeEventListener(event, listener, useCapture)
     } else if (target.detachEvent) {
