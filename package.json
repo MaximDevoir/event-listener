@@ -1,7 +1,7 @@
 {
   "name": "@maximdevoir/event-listener",
   "description": "EventListener handles the adding and removing of events throughout your document. Works with old browsers that use attachEvent and detachEvent (IE 8 and below).",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "main": "lib/event-listener.js",
   "license": "MIT",
   "author": {
