@@ -12,7 +12,13 @@ jobs:
       - name: install
         run: yarn install --frozen-lockfile
       - name: test
-        run: yarn run test
+        run: |
+          yarn run test
+          yarn run coverage
+      - name: codecov
+        uses: codecov/codecov-action@v1.0.3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
       - name: lint
         run: yarn run lint
       - name: publish dry-run
