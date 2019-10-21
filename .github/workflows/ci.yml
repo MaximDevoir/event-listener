@@ -1,5 +1,8 @@
 name: Node CI
 on: [push, pull_request]
+env:
+  CI: true
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -15,10 +18,11 @@ jobs:
         run: |
           yarn run test
           yarn run coverage
-      - name: codecov
-        uses: codecov/codecov-action@v1.0.3
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
+      - name: coveralls
+        run: run coverage:coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
+          COVERALLS_SERVICE_NAME: Github Actions
       - name: lint
         run: yarn run lint
       - name: publish dry-run
