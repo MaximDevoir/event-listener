@@ -33,7 +33,7 @@ eventListener.remove(window, 'focus', function() { ... })
 ### Cutting a Release
 
 1. Bump the version number as part of a commit.
-1. Create a tag that begins with `v` (e.g: `v0.1.3`) with the version number you
+1. Create a tag that begins with `v` (e.g: `git tag -a v0.1.3 9fceb02`) with the version number you
    bumped in the previous step. The tag must also stem from the commit of the
    previous step.
 1. Push a tag . The release workflow will begin and publish to NPM.
