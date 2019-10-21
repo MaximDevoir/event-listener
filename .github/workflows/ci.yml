@@ -23,7 +23,7 @@ jobs:
       - name: coveralls
         run: npm run coverage:coveralls
         env:
-          COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN}}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_SERVICE_NAME: Github Actions
       - name: lint
         run: yarn run lint
