@@ -28,6 +28,13 @@ eventListener.add(window, 'focus', function() { ... })
 eventListener.remove(window, 'focus', function() { ... })
 ```
 
+## Contributing
+
+### Cutting a Release
+
+Push a tag that begins with `v` (e.g: `v0.1.3`). The release workflow will begin
+and publish to NPM.
+
 ## License
 
 [MIT](LICENSE)
